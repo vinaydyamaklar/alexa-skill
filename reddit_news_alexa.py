@@ -45,7 +45,7 @@ def start_skill():
 def share_headlines():
     dialog_state = get_dialog_state()
     if dialog_state != 'COMPLETED':
-	return delegate(speech=None)
+        return delegate(speech=None)
 
     headlines = get_headlines(news)
     headline_msg = 'The current news headlines are {}'.format(headlines)
