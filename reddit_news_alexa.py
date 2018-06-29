@@ -29,7 +29,7 @@ def get_headlines():
 
 @app.route('/')
 def homepage():
-    return "Hi there, how a you doing?"
+    return "Hi there, how are you doing?"
 
 
 @ask.launch
@@ -52,4 +52,5 @@ def no_intent():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0",port=5000)
+
