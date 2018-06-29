@@ -30,6 +30,7 @@ def get_headlines(news):
 def get_dialog_state():
     return session['dialogState']
 
+
 @app.route('/')
 def homepage():
     return "Hi there, how are you doing?"
@@ -45,7 +46,7 @@ def start_skill():
 def share_headlines(news_type):
     dialog_state = get_dialog_state()
     if dialog_state != 'COMPLETED':
-        return delegate(speech=None)
+        return delegate()
 
     if news_type is not None:
         headlines = get_headlines(news_type)
@@ -63,4 +64,3 @@ def no_intent():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=5000)
-
