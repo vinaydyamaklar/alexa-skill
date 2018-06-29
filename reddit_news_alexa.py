@@ -48,7 +48,7 @@ def share_headlines(news_type):
     if dialog_state != 'COMPLETED':
         return delegate()
 
-    if news_type is not None:
+    if news_type is not "None":
         headlines = get_headlines(news_type)
         headline_msg = 'The current news headlines are {}'.format(headlines)
         return statement(headline_msg)
