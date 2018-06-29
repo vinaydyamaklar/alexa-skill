@@ -41,13 +41,13 @@ def start_skill():
     return question(welcome_message)
 
 
-@ask.intent("YesIntent", convert={'news': string})
-def share_headlines():
+@ask.intent("YesIntent")
+def share_headlines(news_type):
     dialog_state = get_dialog_state()
     if dialog_state != 'COMPLETED':
         return delegate(speech=None)
 
-    headlines = get_headlines(news)
+    headlines = get_headlines(news_type)
     headline_msg = 'The current news headlines are {}'.format(headlines)
     return statement(headline_msg)
 
