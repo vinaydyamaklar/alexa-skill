@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_ask import Ask, statement, question, session
+from flask_ask import Ask, statement, question, session, delegate
 import json
 import requests
 import time
@@ -9,7 +9,7 @@ app = Flask(__name__)
 ask = Ask(app, "/reddit_reader")
 
 
-def get_headlines():
+def get_headlines(news):
     user_pass_dict = {'user': 'prasad_vinay',
                       'passwd': 'suma1vinay',
                       'api_type': 'json'}
@@ -17,7 +17,7 @@ def get_headlines():
     sess.headers.update({'User-Agent': 'Testing Alexa: Vinay'})
     sess.post('https://wwww.reddit.com/api/login',data = user_pass_dict)
     time.sleep(1)
-    url = 'https://reddit.com/r/worldnews/.json?limit=2'
+    url = 'https://reddit.com/r/'+news+'/.json?limit=2'
     html = sess.get(url)
     data = json.loads(html.content.decode('utf-8'))
     titles = []
@@ -26,6 +26,9 @@ def get_headlines():
     titles = '... '.join([i for i in titles])
     return titles
 
+
+def get_dialog_state():
+    return session['dialogState']
 
 @app.route('/')
 def homepage():
@@ -38,9 +41,13 @@ def start_skill():
     return question(welcome_message)
 
 
-@ask.intent("YesIntent")
+@ask.intent("YesIntent", convert={'news': string})
 def share_headlines():
-    headlines = get_headlines()
+    dialog_state = get_dialog_state()
+    if dialog_state != 'COMPLETED':
+	return delegate(speech=None)
+
+    headlines = get_headlines(news)
     headline_msg = 'The current news headlines are {}'.format(headlines)
     return statement(headline_msg)
 
