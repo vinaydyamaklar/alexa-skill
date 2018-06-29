@@ -47,9 +47,12 @@ def share_headlines(news_type):
     if dialog_state != 'COMPLETED':
         return delegate(speech=None)
 
-    headlines = get_headlines(news_type)
-    headline_msg = 'The current news headlines are {}'.format(headlines)
-    return statement(headline_msg)
+    if news_type is not None:
+        headlines = get_headlines(news_type)
+        headline_msg = 'The current news headlines are {}'.format(headlines)
+        return statement(headline_msg)
+    else:
+        no_intent()
 
 
 @ask.intent("NoIntent")
