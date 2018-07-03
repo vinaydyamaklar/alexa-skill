@@ -10,8 +10,8 @@ ask = Ask(app, "/reddit_reader")
 
 
 def get_headlines(news):
-    user_pass_dict = {'user': 'prasad_vinay',
-                      'passwd': 'suma1vinay',
+    user_pass_dict = {'user': 'USERNAME',
+                      'passwd': 'PASSWORD',
                       'api_type': 'json'}
     sess = requests.session()
     sess.headers.update({'User-Agent': 'Testing Alexa: Vinay'})
