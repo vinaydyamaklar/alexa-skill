@@ -1,0 +1,127 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "reddit reader",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": [
+                        "okay...No problem"
+                    ]
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": [
+                        "okay...have a great time"
+                    ]
+                },
+                {
+                    "name": "YesIntent",
+                    "slots": [
+                        {
+                            "name": "news_type",
+                            "type": "news_type",
+                            "samples": [
+                                "{news_type}",
+                                "I would like to listen {news_type}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "okay",
+                        "please",
+                        "sure",
+                        "yes"
+                    ]
+                },
+                {
+                    "name": "NoIntent",
+                    "slots": [],
+                    "samples": [
+                        "go away",
+                        "get lost",
+                        "get out",
+                        "no"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "news_type",
+                    "values": [
+                        {
+                            "id": "ID_NONE",
+                            "name": {
+                                "value": "None",
+                                "synonyms": [
+                                    "not required",
+                                    "sorry"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "ID_SPORT_NEWS",
+                            "name": {
+                                "value": "sportsnews",
+                                "synonyms": [
+                                    "game news",
+                                    "sports news",
+                                    "sport",
+                                    "games",
+                                    "sports"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "ID_WORLD_NEWS",
+                            "name": {
+                                "value": "worldnews",
+                                "synonyms": [
+                                    "earth news",
+                                    "world news",
+                                    "earth",
+                                    "world"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "YesIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "news_type",
+                            "type": "news_type",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.830068263289.731971544013"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.830068263289.731971544013",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "would you like to listen sports news or world news?"
+                    }
+                ]
+            }
+        ]
+    }
+}
